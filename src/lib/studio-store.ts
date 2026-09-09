@@ -66,7 +66,7 @@ export const useStudio = create<StudioState>()(
             {
               id: newId(),
               role: "assistant",
-              text: `Loaded ${tpl.spec.name}. ${tpl.spec.tagline} Tap through the phone, then tell me what to change — or download the Android Studio project.`,
+              text: `Loaded ${tpl.spec.name}. ${tpl.spec.tagline} Tap through the phone, then tell me what to change — or download the APK-ready Android project.`,
             },
           ]),
           generating: false,

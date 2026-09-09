@@ -213,7 +213,7 @@ export function StudioPage() {
     if (!project) return;
     const files = buildAndroidProject(project.spec);
     downloadBlob(zipFiles(files), `${project.spec.name.replace(/\s+/g, "")}.zip`);
-    toast.success("Android Studio project downloaded");
+    toast.success("APK-ready Android project downloaded");
   }
 
   const spec = project?.spec;
@@ -251,7 +251,7 @@ export function StudioPage() {
           className="hidden sm:inline-flex"
         >
           <Download className="size-3.5" />
-          Download
+          Download APK kit
         </Button>
         <Button
           variant="secondary"
@@ -259,7 +259,7 @@ export function StudioPage() {
           onClick={download}
           disabled={!spec || spec.packageName === "com.forge.draft" || generating}
           className="sm:hidden"
-          aria-label="Download project"
+          aria-label="Download APK kit"
         >
           <Download className="size-4" />
         </Button>
@@ -302,7 +302,7 @@ export function StudioPage() {
 
         <aside className="hidden min-w-0 flex-1 border-l border-border xl:flex xl:max-w-md xl:flex-col 2xl:max-w-lg">
           <div className="flex h-10 items-center px-4 text-[11px] font-medium tracking-wider text-subtle uppercase">
-            Android project
+            APK-ready project
           </div>
           <div className="min-h-0 flex-1">
             <CodePanel />

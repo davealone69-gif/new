@@ -64,11 +64,11 @@ export function LandingPage() {
           <h1 className="stagger-item mt-4 font-display text-4xl leading-[1.05] font-medium tracking-tight text-fg sm:text-5xl lg:text-6xl">
             Describe an app.
             <br />
-            Leave with Android.
+            Leave with an APK.
           </h1>
           <p className="stagger-item mt-5 max-w-xl text-base leading-relaxed text-muted">
-            Forge designs the screens, writes Jetpack Compose, and hands you a project you can
-            open in Android Studio. No keys. No waitlist. Free.
+            Forge designs the screens, writes Jetpack Compose, and hands you an APK-ready Android
+            project with build instructions. No keys. No waitlist. Free.
           </p>
 
           <form
@@ -154,7 +154,7 @@ export function LandingPage() {
           {[
             { step: "01", title: "Describe", body: "A sentence is enough. Forge designs screens, copy, and a Material palette." },
             { step: "02", title: "Preview", body: "Tap through a live phone. Ask for changes in plain language." },
-            { step: "03", title: "Export", body: "Download a Kotlin + Compose project and run it in Android Studio." },
+            { step: "03", title: "Export", body: "Download an APK-ready Kotlin + Compose project and build the debug APK." },
           ].map((item) => (
             <div key={item.step} className="bg-bg px-6 py-8">
               <p className="font-mono text-[11px] tracking-wider text-subtle">{item.step}</p>
@@ -195,7 +195,7 @@ export function LandingPage() {
       </section>
 
       <footer className="mx-auto max-w-6xl px-5 pb-10 text-[12px] text-subtle">
-        Exports a Kotlin + Jetpack Compose project. Open it in Android Studio to run on a device.
+        Exports an APK-ready Kotlin + Jetpack Compose project with a GitHub Actions APK build file.
       </footer>
     </div>
   );
