@@ -1,13 +1,13 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { n as require_react } from "../_libs/@radix-ui/react-compose-refs+[...].mjs";
-import { n as require_jsx_runtime } from "../_libs/radix-ui__react-context+react.mjs";
-import { n as Slot } from "../_libs/@radix-ui/react-primitive+[...].mjs";
+import { x as require_jsx_runtime } from "../_libs/@tanstack/react-router+[...].mjs";
 import { n as TSS_SERVER_FUNCTION, r as getServerFnById, t as createServerFn } from "./ssr.mjs";
 import { t as cva } from "../_libs/class-variance-authority+clsx.mjs";
 import { a as newId, n as cn, t as SKELETON_SPEC } from "./spec-Cq97qa1k.mjs";
 import { B as ArrowLeft, C as House, D as Droplets, E as Dumbbell, F as Calendar, I as BookOpen, L as Bell, M as Check, N as ChartColumn, P as Camera, S as Leaf, T as Ellipsis, _ as Music, a as User, b as Map, c as Timer, f as Share2, g as Pencil, h as Plus, i as UtensilsCrossed, j as ChevronRight, l as Sun, m as Search, n as Wifi, p as Settings, r as Wallet, s as Trash2, t as Zap, u as Star, v as Moon, w as Heart } from "../_libs/lucide-react.mjs";
+import { t as Slot } from "../_libs/radix-ui__react-slot.mjs";
 import { n as create, t as persist } from "../_libs/zustand.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/studio-store-CzUklK_T.js
+//#region node_modules/.nitro/vite/services/ssr/assets/studio-store-DNL5Qswi.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function hexToRgb(hex) {
@@ -1561,7 +1561,7 @@ var useStudio = create()(persist((set, get) => ({
 			project: makeProject(tpl.spec, [{
 				id: newId(),
 				role: "assistant",
-				text: `Loaded ${tpl.spec.name}. ${tpl.spec.tagline} Tap through the phone, then tell me what to change — or download the Android Studio project.`
+				text: `Loaded ${tpl.spec.name}. ${tpl.spec.tagline} Tap through the phone, then tell me what to change — or download the APK-ready Android project.`
 			}]),
 			generating: false,
 			error: null,

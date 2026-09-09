@@ -1,37 +1,13 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { n as require_react } from "../_libs/@radix-ui/react-compose-refs+[...].mjs";
-import { _ as Link } from "../_libs/@tanstack/react-router+[...].mjs";
-import { n as require_jsx_runtime } from "../_libs/radix-ui__react-context+react.mjs";
+import { v as Link, x as require_jsx_runtime } from "../_libs/@tanstack/react-router+[...].mjs";
 import { n as cn, o as pascalCase } from "./spec-Cq97qa1k.mjs";
 import { A as CodeXml, B as ArrowLeft, M as Check, O as Download, d as Smartphone, k as Copy, x as LoaderCircle, y as MessageSquare } from "../_libs/lucide-react.mjs";
 import { n as toast } from "../_libs/sonner.mjs";
-import { c as schemeFromSeed, i as PhonePreview, l as useStudio, n as Button, o as Textarea, s as hexToArgb, t as Badge } from "./studio-store-CzUklK_T.mjs";
-import { a as Viewport, i as ScrollAreaThumb, n as Root, r as ScrollAreaScrollbar, t as Corner } from "../_libs/@radix-ui/react-scroll-area+[...].mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/studio-CV4pjMAV.js
+import { c as schemeFromSeed, i as PhonePreview, l as useStudio, n as Button, o as Textarea, s as hexToArgb, t as Badge } from "./studio-store-DNL5Qswi.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/studio-2bOWVKy9.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
-var ScrollArea = import_react.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Root, {
-	ref,
-	className: cn("relative overflow-hidden", className),
-	...props,
-	children: [
-		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Viewport, {
-			className: "size-full rounded-[inherit]",
-			children
-		}),
-		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollBar, {}),
-		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Corner, {})
-	]
-}));
-ScrollArea.displayName = Root.displayName;
-var ScrollBar = import_react.forwardRef(({ className, orientation = "vertical", ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollAreaScrollbar, {
-	ref,
-	orientation,
-	className: cn("flex touch-none select-none transition-colors", orientation === "vertical" && "h-full w-2.5 border-l border-l-transparent p-px", orientation === "horizontal" && "h-2.5 flex-col border-t border-t-transparent p-px", className),
-	...props,
-	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollAreaThumb, { className: "relative flex-1 rounded-full bg-border" })
-}));
-ScrollBar.displayName = ScrollAreaScrollbar.displayName;
 function kq(value) {
 	return `"${value.replace(/\\/g, "\\\\").replace(/"/g, "\\\"").replace(/\$/g, "\\$").replace(/\n/g, " ")}"`;
 }
@@ -137,6 +113,7 @@ function buildAndroidProject(spec) {
 	const pkgPath = pkg.replace(/\./g, "/");
 	const dark = spec.theme.mode === "dark";
 	const root = appClass;
+	const launcherBg = scheme.primary;
 	const settings = `pluginManagement {
     repositories {
         google()
@@ -234,10 +211,71 @@ dependencies {
     <string name="app_name">${spec.name.replace(/&/g, "&")}</string>
 </resources>
 `;
+	const colorsXml = `<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="launcher_background">${launcherBg}</color>
+</resources>
+`;
 	const themesXml = `<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.${appClass}" parent="android:Theme.Material.Light.NoActionBar" />
 </resources>
+`;
+	const launcherForeground = `<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M54,16C33,16 16,33 16,54s17,38 38,38 38,-17 38,-38S75,16 54,16z" />
+    <path
+        android:fillColor="#CCFFFFFF"
+        android:pathData="M54,30C40.75,30 30,40.75 30,54s10.75,24 24,24 24,-10.75 24,-24S67.25,30 54,30z" />
+    <path
+        android:fillColor="${dark ? "#FF101311" : launcherBg}"
+        android:pathData="M54,40l9,9 15,0 0,10 -15,0 -9,9 -9,-9 -15,0 0,-10 15,0z" />
+</vector>
+`;
+	const launcherIcon = `<?xml version="1.0" encoding="utf-8"?>
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@color/launcher_background" />
+    <foreground android:drawable="@drawable/ic_launcher_foreground" />
+</adaptive-icon>
+`;
+	const androidCi = `name: Android APK
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build debug APK
+        run: gradle assembleDebug
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-apk
+          path: app/build/outputs/apk/debug/*.apk
 `;
 	const colorKt = `package ${pkg}.ui.theme
 
@@ -650,6 +688,12 @@ ${spec.tagline}
 
 Android app generated by Forge. Jetpack Compose · Material 3.
 
+## Make an APK
+
+1. Open the project in Android Studio and press **Run**, or build from the terminal with \`gradle assembleDebug\`.
+2. Find the debug APK at \`app/build/outputs/apk/debug/app-debug.apk\`.
+3. If you push this folder to GitHub, \`.github/workflows/android-ci.yml\` will also build and upload the APK for you.
+
 ## Run it
 
 1. Install [Android Studio](https://developer.android.com/studio) (Ladybug or newer).
@@ -680,6 +724,10 @@ Screens: ${spec.nav.map((n) => n.label).join(" · ")}
 `
 		},
 		{
+			path: `${root}/.github/workflows/android-ci.yml`,
+			contents: androidCi
+		},
+		{
 			path: `${root}/settings.gradle.kts`,
 			contents: settings
 		},
@@ -704,8 +752,24 @@ Screens: ${spec.nav.map((n) => n.label).join(" · ")}
 			contents: strings
 		},
 		{
+			path: `${root}/app/src/main/res/values/colors.xml`,
+			contents: colorsXml
+		},
+		{
 			path: `${root}/app/src/main/res/values/themes.xml`,
 			contents: themesXml
+		},
+		{
+			path: `${root}/app/src/main/res/drawable/ic_launcher_foreground.xml`,
+			contents: launcherForeground
+		},
+		{
+			path: `${root}/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml`,
+			contents: launcherIcon
+		},
+		{
+			path: `${root}/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml`,
+			contents: launcherIcon
 		},
 		{
 			path: `${root}/app/src/main/java/${pkgPath}/MainActivity.kt`,
@@ -809,11 +873,13 @@ function zipFiles(files) {
 	ev.setUint32(12, centralSize, true);
 	ev.setUint32(16, offset, true);
 	ev.setUint16(20, 0, true);
-	return new Blob([
+	const parts = [];
+	for (const chunk of [
 		...locals,
 		...centrals,
 		eocd
-	], { type: "application/zip" });
+	]) parts.push(chunk.buffer.slice(chunk.byteOffset, chunk.byteOffset + chunk.byteLength));
+	return new Blob(parts, { type: "application/zip" });
 }
 function downloadBlob(blob, filename) {
 	const url = URL.createObjectURL(blob);
@@ -867,13 +933,13 @@ function ChatPanel() {
 	}
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		className: "flex h-full min-h-0 flex-col",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollArea, {
-			className: "min-h-0 flex-1",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "min-h-0 flex-1 overflow-y-auto",
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "flex flex-col gap-4 p-4",
 				children: [
 					(project?.messages ?? []).map((msg) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: cn("max-w-[92%] text-[13px] leading-relaxed", msg.role === "user" ? "self-end" : "self-start"),
+						className: cn("max-w-[92%] text-sm leading-relaxed", msg.role === "user" ? "self-end" : "self-start"),
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 							className: "mb-1 text-[10px] font-medium tracking-wider text-subtle uppercase",
 							children: msg.role === "user" ? "You" : "Forge"
@@ -883,11 +949,11 @@ function ChatPanel() {
 						})]
 					}, msg.id)),
 					generating ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex items-center gap-2 text-[13px] text-muted",
+						className: "flex items-center gap-2 text-sm text-muted",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, { className: "size-3.5 animate-spin" }), "Designing screens…"]
 					}) : null,
 					error ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						className: "text-[13px] text-danger",
+						className: "text-sm text-danger",
 						children: error
 					}) : null,
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { ref: endRef })
@@ -944,8 +1010,8 @@ function CodePanel() {
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		className: "flex h-full min-h-0",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollArea, {
-			className: "w-44 shrink-0 border-r border-border",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "w-44 shrink-0 overflow-y-auto border-r border-border",
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
 				className: "p-2",
 				children: files.map((file) => {
@@ -978,8 +1044,8 @@ function CodePanel() {
 					"aria-label": "Copy file",
 					children: copied ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: "size-3.5" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Copy, { className: "size-3.5" })
 				})]
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollArea, {
-				className: "min-h-0 flex-1",
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "min-h-0 flex-1 overflow-auto",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("pre", {
 					className: "p-4 font-mono text-[11px] leading-relaxed text-muted whitespace-pre-wrap",
 					children: current?.contents
@@ -999,7 +1065,7 @@ function StudioPage() {
 	function download() {
 		if (!project) return;
 		downloadBlob(zipFiles(buildAndroidProject(project.spec)), `${project.spec.name.replace(/\s+/g, "")}.zip`);
-		toast.success("Android Studio project downloaded");
+		toast.success("APK-ready Android project downloaded");
 	}
 	const spec = project?.spec;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -1033,7 +1099,7 @@ function StudioPage() {
 						onClick: download,
 						disabled: !spec || spec.packageName === "com.forge.draft" || generating,
 						className: "hidden sm:inline-flex",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Download, { className: "size-3.5" }), "Download"]
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Download, { className: "size-3.5" }), "Download APK kit"]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
 						variant: "secondary",
@@ -1041,7 +1107,7 @@ function StudioPage() {
 						onClick: download,
 						disabled: !spec || spec.packageName === "com.forge.draft" || generating,
 						className: "sm:hidden",
-						"aria-label": "Download project",
+						"aria-label": "Download APK kit",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Download, { className: "size-4" })
 					})
 				]
@@ -1091,7 +1157,7 @@ function StudioPage() {
 						className: "hidden min-w-0 flex-1 border-l border-border xl:flex xl:max-w-md xl:flex-col 2xl:max-w-lg",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 							className: "flex h-10 items-center px-4 text-[11px] font-medium tracking-wider text-subtle uppercase",
-							children: "Android project"
+							children: "APK-ready project"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 							className: "min-h-0 flex-1",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CodePanel, {})

@@ -1,12 +1,11 @@
 import { i as __toESM, n as __exportAll } from "../_runtime.mjs";
 import { n as require_react } from "../_libs/@radix-ui/react-compose-refs+[...].mjs";
-import { f as createRouter, g as createRootRoute, h as createFileRoute, l as Scripts, m as lazyRouteComponent, p as Outlet, u as HeadContent, y as useRouter } from "../_libs/@tanstack/react-router+[...].mjs";
-import { n as require_jsx_runtime } from "../_libs/radix-ui__react-context+react.mjs";
+import { _ as createRootRoute, b as useRouter, d as HeadContent, g as createFileRoute, h as lazyRouteComponent, m as Outlet, p as createRouter, u as Scripts, x as require_jsx_runtime } from "../_libs/@tanstack/react-router+[...].mjs";
 import { o as TriangleAlert } from "../_libs/lucide-react.mjs";
 import { t as Toaster } from "../_libs/sonner.mjs";
 import { a as union, i as string, n as number, r as object, t as literal } from "../_libs/zod.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-CpSwuz11.js
-var router_CpSwuz11_exports = /* @__PURE__ */ __exportAll({ getRouter: () => getRouter });
+//#region node_modules/.nitro/vite/services/ssr/assets/router-CR7hV_IM.js
+var router_CR7hV_IM_exports = /* @__PURE__ */ __exportAll({ getRouter: () => getRouter });
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var FALLBACK_MESSAGE = "An unexpected error occurred. Try reloading the page.";
@@ -300,7 +299,7 @@ function PreviewHostBridge() {
 	}, [router]);
 	return null;
 }
-var styles_default = "/assets/styles-CFEzZqUB.css";
+var styles_default = "/assets/styles-Defj5jte.css";
 var APP_NAME = "Forge";
 var Route$2 = createRootRoute({
 	head: () => ({
@@ -368,9 +367,9 @@ var Route$2 = createRootRoute({
 		] })]
 	})
 });
-var $$splitComponentImporter$1 = () => import("./routes-DSq6lUXH.mjs");
+var $$splitComponentImporter$1 = () => import("./routes-BlAGsqe5.mjs");
 var Route$1 = createFileRoute("/")({ component: lazyRouteComponent($$splitComponentImporter$1, "component") });
-var $$splitComponentImporter = () => import("./studio-CV4pjMAV.mjs");
+var $$splitComponentImporter = () => import("./studio-2bOWVKy9.mjs");
 var Route = createFileRoute("/studio")({ component: lazyRouteComponent($$splitComponentImporter, "component") });
 var rootRouteChildren = {
 	IndexRoute: Route$1.update({
@@ -392,4 +391,4 @@ function getRouter() {
 	});
 }
 //#endregion
-export { getRouter, router_CpSwuz11_exports as t };
+export { getRouter, router_CR7hV_IM_exports as t };

@@ -1,10 +1,9 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { n as require_react } from "../_libs/@radix-ui/react-compose-refs+[...].mjs";
-import { _ as Link, v as useNavigate } from "../_libs/@tanstack/react-router+[...].mjs";
-import { n as require_jsx_runtime } from "../_libs/radix-ui__react-context+react.mjs";
+import { v as Link, x as require_jsx_runtime, y as useNavigate } from "../_libs/@tanstack/react-router+[...].mjs";
 import { R as ArrowUpRight, d as Smartphone, z as ArrowRight } from "../_libs/lucide-react.mjs";
-import { a as TEMPLATES, i as PhonePreview, l as useStudio, n as Button, o as Textarea, r as EXAMPLE_PROMPTS, t as Badge } from "./studio-store-CzUklK_T.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-DSq6lUXH.js
+import { a as TEMPLATES, i as PhonePreview, l as useStudio, n as Button, o as Textarea, r as EXAMPLE_PROMPTS, t as Badge } from "./studio-store-DNL5Qswi.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-BlAGsqe5.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function LandingPage() {
@@ -73,12 +72,12 @@ function LandingPage() {
 							children: [
 								"Describe an app.",
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
-								"Leave with Android."
+								"Leave with an APK."
 							]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 							className: "stagger-item mt-5 max-w-xl text-base leading-relaxed text-muted",
-							children: "Forge designs the screens, writes Jetpack Compose, and hands you a project you can open in Android Studio. No keys. No waitlist. Free."
+							children: "Forge designs the screens, writes Jetpack Compose, and hands you an APK-ready Android project with build instructions. No keys. No waitlist. Free."
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
 							className: "stagger-item mt-8 rounded-xl bg-surface p-2 shadow-[var(--shadow-border)]",
@@ -127,6 +126,17 @@ function LandingPage() {
 								className: "h-9 rounded-full px-3.5 text-left text-[13px] text-muted shadow-[var(--shadow-border)] transition-[background-color,color] duration-150 hover:bg-elevated hover:text-fg",
 								children: example
 							}, example))
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "mt-12 flex justify-center lg:hidden",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PhonePreview, {
+								spec: TEMPLATES[0].spec,
+								activeScreenId: screenId,
+								onScreenChange: setScreenId
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "mt-4 text-center text-xs text-subtle",
+								children: "Bloom — a starter. Tap the bar to move around."
+							})] })
 						})
 					]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("aside", {
@@ -169,7 +179,7 @@ function LandingPage() {
 						{
 							step: "03",
 							title: "Export",
-							body: "Download a Kotlin + Compose project and run it in Android Studio."
+							body: "Download an APK-ready Kotlin + Compose project and build the debug APK."
 						}
 					].map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "bg-bg px-6 py-8",
@@ -235,7 +245,7 @@ function LandingPage() {
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("footer", {
 				className: "mx-auto max-w-6xl px-5 pb-10 text-[12px] text-subtle",
-				children: "Exports a Kotlin + Jetpack Compose project. Open it in Android Studio to run on a device."
+				children: "Exports an APK-ready Kotlin + Jetpack Compose project with a GitHub Actions APK build file."
 			})
 		]
 	});
